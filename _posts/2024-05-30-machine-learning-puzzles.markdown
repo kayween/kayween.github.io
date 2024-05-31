@@ -41,7 +41,7 @@ We assume the prior \\( p(\zv) \\) is a Gaussian, the variational family \\( \Qc
 1. Show that there exists a unique optimum \\( q^* \\).
 2. Let \\( \Nc(\muv_m, \Sigmav_m) = \argmin_{q \in \Qc} \Ds_\KL\big(q, p\big(\zv \mid \\{\xv_i\\} _ {i=1}^{m}\big)\big) \\) be the optimal variational approximation with the first \\( m \\) data points only.
 Show that \\( \Sigmav_1 \succeq \Sigmav_2 \succeq \cdots \succeq \Sigmav_n \\).
-That is, the approximate posterior uncertainty does not increase with more data.
+That is, the approximate posterior uncertainty contracts with more data.
 
 
 # Short Questions
