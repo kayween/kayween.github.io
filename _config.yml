@@ -21,7 +21,7 @@
 title: The Really Good Blog
 email: you.know@where.to.find.me 
 description: >- # this means to ignore newlines until "baseurl:"
-    The really good blog, as shown in the title.
+    This is a really good blog, as shown by the title.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: thekaiwenwu 
