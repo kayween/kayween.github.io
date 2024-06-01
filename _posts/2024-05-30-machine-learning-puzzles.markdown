@@ -49,4 +49,4 @@ That is, the approximate posterior uncertainty contracts with more data.
 However, is it jointly convex in both \\(\xv\\) and \\(\Av\\)? What about \\(\frac12 \xv^\top \Av\inv \xv\\)?
 
 2. Show that \\(f(\xv, \Av) = -\log\det(\Av - \xv \xv^\top)\\) is jointly convex in both \\(\xv\\) and \\(\Av\\) on its domain \\(\Av - \xv \xv^\top \succ 0\\).
-P.S. This is the convex conjugate of the log-partition function of Gaussian distributions.
+P.S. This is the convex conjugate of the log-partition function of Gaussian distributions, but you have to do the proof without resorting the conjugacy.
