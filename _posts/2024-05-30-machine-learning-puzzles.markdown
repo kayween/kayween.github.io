@@ -14,6 +14,8 @@ categories: jekyll update
 \newcommand{\Iv}{\mathbf{I}}
 \newcommand{\xv}{\mathbf{x}}
 \newcommand{\zv}{\mathbf{z}}
+\newcommand{\Sv}{\mathbf{S}}
+\newcommand{\mv}{\mathbf{m}}
 \newcommand{\Ds}{\mathsf{D}}
 \newcommand{\KL}{\mathrm{KL}}
 \DeclareMathOperator*{\maxi}{\mathrm{maximize}}
@@ -21,7 +23,10 @@ categories: jekyll update
 \newcommand{\Nc}{\mathcal{N}}
 \newcommand{\muv        }{\boldsymbol \mu        }
 \newcommand{\Sigmav     }{\boldsymbol \Sigma     }
+\newcommand{\lambdav    }{\boldsymbol \lambda    }
+\newcommand{\Lambdav    }{\boldsymbol \Lambda    }
 \newcommand{\inv}{^{-1}}
+\newcommand{\F}{\mathrm{F}}
 \\]
 
 \\[
@@ -34,21 +39,50 @@ Presumably, LLMs would struggle with these problems due to their originality.
 
 # Maximum Likelihood Estimation for Gaussians
 
-In undergraduate statistics class, we learned that the empirical mean \\( \hat\muv = \frac1n \sum_{i=1}^{n} \xv_i \\) and the empirical covariance \\( \widehat\Sigmav = \frac{1}{n} \sum_{i=1}^{n} (\xv - \hat\muv) (\xv - \hat \muv)^\top \\) are the maximum likelihood estimators for Gaussians, because they "maximize" the likelihood.
-
-The negative log likelihood of Gaussian distributions is
+In undergraduate statistics class, everyone learns that the empirical mean \\( \hat\muv = \frac1n \sum_{i=1}^{n} \xv_i \\) and the empirical covariance \\( \widehat\Sigmav = \frac{1}{n} \sum_{i=1}^{n} (\xv_i - \hat\muv) (\xv_i - \hat \muv)^\top \\) are the maximum likelihood estimators for Gaussians, because they "maximize" the likelihood.
+Concretely, we are taught that
 \\[
-    \ell(\muv, \Sigmav) = \sum_{i=1}^{n} \Big( \frac12 (\xv_i - \muv)^\top \Sigmav\inv (\xv_i - \muv) + \frac12 \log\det \Sigmav \Big)
+\hat\muv, \hat\Sigmav = \argmin_{\muv, \Sigmav} \ell(\muv, \Sigmav),
 \\]
-where we have ignored constants that are independent of \\( \muv \\) and \\( \Sigmav \\).
+where \\( \ell(\muv, \Sigmav) \\) is the negative log likelihood
+\\[
+\ell(\muv, \Sigmav) = \frac1n \sum_{i=1}^{n} \Big(
+    (\xv_i - \muv)^\top \Sigmav\inv (\xv_i - \muv) +
+    \log\det \Sigmav
+\Big).
+\\]
+<!-- where we have ignored constants that are independent of \\( \muv \\) and \\( \Sigmav \\). -->
 
-1. Show that the log likelihood is a concave function jointly in both \\( \muv \\) and \\( \Sigmav \\).
+1. Show that the negative log likelihood \\( \ell \\) is a non-convex function.
+Though, a change of variable \\( \mv = \Sigmav\inv \muv \\) and \\( \Sv = \Sigmav\inv \\) makes it convex:
+\\[
+\ell(\mv, \Sv) =
+\frac1n \sum_{i=1}^{n} \Big(
+    \xv_i^\top \Sv \xv_i -
+    2 \xv_i^\top \mv +
+    \mv^\top \Sv\inv \mv -
+    \log\det \Sv
+\Big).
+\\]
+Note: The convexity is not by accident.
+In fact, maximum likelihood estimation of any exponential family distribution reduces a convex optimization problem.
 
-2. Show that the log likelihood is unbounded above when the empirical covariance is non-singular.
+2. Show that the negative log likelihood \\( \ell \\) is unbounded below when the empirical covariance is singular.
 In particular, the maximum likelihood estimator does not exist when \\( n < d \\).
-In this case, how to interpret the empirical covariance matrix?
+In this case, how to justify that \\( \hat\muv \\) and \\( \widehat\Sigmav \\) are sensible estimators?
 
-3. What is the empirical covariance when the maximum likelihood estimator does not exist?
+3. Consider the solution path of the following regularized maximum likelihood
+\\[
+<!-- \mv_\*(\gamma), \Sv_\*(\gamma) = \argmin_{\mv, \Sv} \ell(\mv, \Sv) + \gamma \lVert \Sv \rVert_*, -->
+\muv^\*(\gamma), \Sigmav^\*(\gamma) = \argmin_{\muv, \Sigmav} \ell(\muv, \Sigmav) + \gamma \big\lVert \Sigmav\inv \big\rVert_*,
+\\]
+where \\( \lVert \cdot \rVert_\* \\) denotes the nuclear norm.
+Necessarily, you need to first show the regularized problem has a unique minimizer.
+Show that \\( \lim_{\gamma \to 0} \muv^\*(\gamma) = \hat\muv \\) and \\( \lim_{\gamma \to 0} \Sigmav^\*(\gamma) = \widehat\Sigmav \\), regardless whether \\( \widehat \Sigmav \\) is singular or not.
+
+4. Redo (3) by replacing the nuclear norm with the Frobebius norm square \\( \frac12 \lVert \cdot \rVert_\F^2 \\).
+Does it change anything?
+What if we use a norm other than the nuclear norm or the Frobenius norm?
 
 # Variational Inference
 
@@ -73,7 +107,7 @@ Show that \\( \Iv \succeq \Sigmav_1 \succeq \Sigmav_2 \succeq \cdots \succeq \Si
 That is, the posterior uncertainty contracts with more data.
 
 4. Can you construct a pathological example where increasing the number of data points inflates the posterior uncertainty?
-
+Necessarily, the likelihood \\( p(\xv \mid \zv) \\) cannot be log-concave in \\( \zv \\).
 
 # Log Determinant
 
