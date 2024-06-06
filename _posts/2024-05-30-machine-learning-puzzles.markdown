@@ -33,27 +33,26 @@ categories: jekyll update
 \DeclareMathOperator*{\argmin}{argmin}
 \\]
 
-I am compiling a collection of fun exercises that I came across during my research.
+I am compiling a collection of interesting exercises that I came across during my research.
 Most problems have short descriptions, can be solved in a few lines, and hopefully inspires some thoughts.
-Presumably, LLMs would struggle with these problems due to their originality.
+<!-- Presumably, LLMs would struggle with these problems due to their originality. -->
 
-# Maximum Likelihood Estimation for Gaussians
+# When the Gaussian MLE Fails to Exist
 
-In undergraduate statistics class, everyone learns that the empirical mean \\( \hat\muv = \frac1n \sum_{i=1}^{n} \xv_i \\) and the empirical covariance \\( \widehat\Sigmav = \frac{1}{n} \sum_{i=1}^{n} (\xv_i - \hat\muv) (\xv_i - \hat \muv)^\top \\) are the maximum likelihood estimators for Gaussians, because they "maximize" the likelihood.
-Concretely, we are taught that
+In undergraduate statistics classes, we learned that the empirical mean \\( \hat\muv = \frac1n \sum_{i=1}^{n} \xv_i \\) and the empirical covariance \\( \widehat\Sigmav = \frac{1}{n} \sum_{i=1}^{n} (\xv_i - \hat\muv) (\xv_i - \hat \muv)^\top \\) are the maximum likelihood estimators for Gaussian distributions \\( \Nc(\muv, \Sigmav) \\).
+Concretely, they "minimize" the negative log likelihood:
 \\[
 \hat\muv, \hat\Sigmav = \argmin_{\muv, \Sigmav} \ell(\muv, \Sigmav),
 \\]
-where \\( \ell(\muv, \Sigmav) \\) is the negative log likelihood
-\\[
-\ell(\muv, \Sigmav) = \frac1n \sum_{i=1}^{n} \Big(
+where
+\\(
+\ell(\muv, \Sigmav) = \frac1n \sum_{i=1}^{n} \big(
     (\xv_i - \muv)^\top \Sigmav\inv (\xv_i - \muv) +
     \log\det \Sigmav
-\Big).
-\\]
-<!-- where we have ignored constants that are independent of \\( \muv \\) and \\( \Sigmav \\). -->
+\big)
+\\).
 
-1. Show that the negative log likelihood \\( \ell \\) is a non-convex function.
+1. Show that the negative log likelihood \\( \ell(\muv, \Sigmav) \\) is a non-convex function.
 Though, a change of variable \\( \mv = \Sigmav\inv \muv \\) and \\( \Sv = \Sigmav\inv \\) makes it convex:
 \\[
 \ell(\mv, \Sv) =
@@ -65,33 +64,30 @@ Though, a change of variable \\( \mv = \Sigmav\inv \muv \\) and \\( \Sv = \Sigma
 \Big).
 \\]
 Note: The convexity is not by accident.
-In fact, maximum likelihood estimation of any exponential family distribution reduces a convex optimization problem.
+Maximum likelihood estimation reduces to a convex optimization problem for all exponential family distributions.
 
-2. Show that the negative log likelihood \\( \ell \\) is unbounded below when the empirical covariance is singular.
-In particular, the maximum likelihood estimator does not exist when \\( n < d \\).
-In this case, how to justify that \\( \hat\muv \\) and \\( \widehat\Sigmav \\) are sensible estimators?
+2. Show that \\( \ell \\) is unbounded below when the empirical covariance is singular, in which case the maximum likelihood estimator does not exist.
 
-3. Consider the solution path of the following regularized maximum likelihood
+3. Consider the solution path of the following regularized problem
 \\[
 <!-- \mv_\*(\gamma), \Sv_\*(\gamma) = \argmin_{\mv, \Sv} \ell(\mv, \Sv) + \gamma \lVert \Sv \rVert_*, -->
 \muv^\*(\gamma), \Sigmav^\*(\gamma) = \argmin_{\muv, \Sigmav} \ell(\muv, \Sigmav) + \gamma \big\lVert \Sigmav\inv \big\rVert_*,
 \\]
 where \\( \lVert \cdot \rVert_\* \\) denotes the nuclear norm.
-Necessarily, you need to first show the regularized problem has a unique minimizer.
 Show that \\( \lim_{\gamma \to 0} \muv^\*(\gamma) = \hat\muv \\) and \\( \lim_{\gamma \to 0} \Sigmav^\*(\gamma) = \widehat\Sigmav \\), regardless whether \\( \widehat \Sigmav \\) is singular or not.
 
 4. Redo (3) by replacing the nuclear norm with the Frobebius norm square \\( \frac12 \lVert \cdot \rVert_\F^2 \\).
 Does it change anything?
-What if we use a norm other than the nuclear norm or the Frobenius norm?
+What about other norms?
 
 # Variational Inference
 
-Given a prior \\( p(\zv) \\), a likelihood \\( p(\xv \mid \zv) \\), and a dataset \\( \\{\xv_i\\} _ {i=1}^{n} \\), variational inference approximates the posterior \\( p\big(\zv \mid \\{\xv_i\\} _ {i=1}^{n}\big) \\) by minimizing the Kullback–Leibler divergence
+Given a dataset \\( \\{\xv_i\\} _ {i=1}^{n} \\), a prior \\( p(\zv) \\), and a likelihood \\( p\big( \\{\xv_i\\} _ {i=1}^{n} \mid \zv\big) = \prod_{i=1}^{n} p(\xv_i \mid \zv) \\), variational inference approximates the posterior \\( p\big(\zv \mid \\{\xv_i\\} _ {i=1}^{n}\big) \\) by minimizing the Kullback–Leibler divergence
 \\[
 \DeclareMathOperator*{\mini}{\mathrm{minimize}}
-    \mini_{q \in \Qc} \Ds_\KL\big(q, p\big(\zv \mid \\{\xv_i\\} _ {i=1}^{n}\big)\big)
+    \mini_{q \in \Qc} \Ds_\KL\big(q, p\big(\zv \mid \\{\xv_i\\} _ {i=1}^{n}\big)\big),
 \\]
-inside a variational family \\( \Qc \\).
+where \\( \Qc \\) is a variational family.
 This is equivalent to maximizing the evidence lower bound
 \\[
     \maxi_{q \in \Qc} \sum_{i=1}^{n} \Eb _ {q(\zv)} \log p(\xv_i \mid \zv) - \Ds_\KL(q(\zv), p(\zv)).
@@ -111,15 +107,15 @@ Necessarily, the likelihood \\( p(\xv \mid \zv) \\) cannot be log-concave in \\(
 
 # Log Determinant
 
-It is well known that the log determinant function \\(\log\det \Xv\\) is concave on its domain \\(\Xv \succeq 0\\).
+It is well known that \\( f(\Xv) = -\log\det \Xv \\) is a convex function on the positive definite cone \\( \Sb_{+ +}^d \\).
 
-1. Show that \\(f(\zv, \Xv) = -\log\det(\Xv - \zv \zv^\top)\\) defined on the domain \\( \Xv - \zv \zv^\top \succ 0\\) is jointly convex in both \\( \zv \\) and \\( \Xv \\).
-Note: This is the convex conjugate of the log-partition function of Gaussian distributions, but you have to do the proof without resorting to the conjugacy.
-
-2. Let \\(f(\Xv) = \Xv\inv\\) be a map defined on \\(\Sb_{+ +}^d\\).
-Show that \\(f\\) is \\(1\\)-Lipschitz in the spectral norm when \\(\Xv \succeq \Iv\\).
+1. Let \\(h(\Xv) = \Xv\inv\\) be a map defined on \\(\Sb_{+ +}^d\\).
+Show that \\( h \\) is \\(1\\)-Lipschitz in the spectral norm when \\(\Xv \succeq \Iv\\).
 Repeat the exercise with the Frobenius norm.
 
-3. Show that the negative log determinant \\(-\log\det \Xv\\) is \\( 1 \\)-Lipschitz in the Frobenius norm when \\(\Xv \succeq \Iv\\).
+2. Show that \\( f(\Xv) \\) is \\( 1 \\)-smooth in the Frobenius norm when \\(\Xv \succeq \Iv\\).
 
-4. Show that the negative log determinant \\(-\log\det \Xv\\) is \\( 1 \\)-strongly convex in the Frobenius norm when \\(\Xv \preceq \Iv\\).
+3. Show that \\( f(\Xv) \\) is \\( 1 \\)-strongly convex in the Frobenius norm when \\(\Xv \preceq \Iv\\).
+
+4. Show that \\( g(\zv, \Xv) = -\log\det(\Xv - \zv \zv^\top) \\) defined on the domain \\( \Xv - \zv \zv^\top \succ 0\\) is jointly convex in both \\( \zv \\) and \\( \Xv \\).
+Note: This is the convex conjugate of the log-partition function of Gaussian distributions, but you have to do the proof without resorting to the conjugacy.
