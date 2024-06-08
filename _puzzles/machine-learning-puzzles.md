@@ -1,8 +1,6 @@
 ---
-layout: post
+layout: base
 title:  "Machine Learning Puzzles"
-date:   2024-05-22 17:21:02 -0400
-categories: jekyll update
 ---
 
 \\[
