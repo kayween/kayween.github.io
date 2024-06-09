@@ -49,7 +49,7 @@ where
 \\).
 
 1. Show that the negative log likelihood \\( \ell(\muv, \Sigmav) \\) is a non-convex function.
-Though, a change of variable \\( \mv = \Sigmav\inv \muv \\) and \\( \Sv = \Sigmav\inv \\) makes it convex:
+Though, a change of variable \\( \mv = \Sigmav\inv \muv \\) and \\( \Sv = \Sigmav\inv \\) makes it jointly convex:
 \\[
 \ell(\mv, \Sv) =
 \frac1n \sum_{i=1}^{n} \Big(

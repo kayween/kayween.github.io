@@ -33,7 +33,7 @@ title:  "Properties of the Log Determinant"
 \DeclareMathOperator*{\argmin}{argmin}
 \\]
 
-# Log Determinant
+# {{ page.title }}
 
 It is well known that \\( f(\Xv) = -\log\det \Xv \\) is a convex function on the positive definite cone \\( \Sb_{+ +}^d \\).
 
