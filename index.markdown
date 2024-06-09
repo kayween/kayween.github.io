@@ -6,21 +6,12 @@ layout: base
 ---
 
 Hi there, welcome to my blog.
+My name is Kaiwen Wu.
+I am a PhD student at the University of Pennsylvania.
+You can find my academic website [here](https://www.seas.upenn.edu/~kaiwenwu/).
 
-I am compiling a collection of interesting exercises that I came across during my research.
-Most problems have short descriptions, can be solved in a few lines, and hopefully inspires some thoughts.
-They are listed as follows.
-Email me if you want a solution and/or find a mistake.
-
-{% for puzzle in site.puzzles %}
-  <h3>
-    <a href="{{ puzzle.url }}">
-      {{ puzzle.title }}
-    </a>
-  </h3>
-{% endfor %}
-
-<h2>Blogs</h2>
+I recently started this blog to document interesting things that I read.
+In the top right corner, you can find a set of (hopefully) interesting exercises.
 
 {% for blog in site.blogs %}
   <h3>
@@ -29,3 +20,5 @@ Email me if you want a solution and/or find a mistake.
     </a>
   </h3>
 {% endfor %}
+
+<!-- [link]({% link _blogs/matrix-quadratic-equation.md %}) -->
