@@ -39,22 +39,70 @@ title: Matrix Square Roots
 \DeclareMathOperator*{\argmin}{argmin}
 \\]
 
-Let \\( \Av \\) be a \\( n \times n \\) square matrix.
-We are interested in its square root.
+This blog post discusses matrix square roots.
+A matrix square root of a \\( n \times n \\) square matrix \\( \Av \\) is defined as any solution to the equation
 \\[
-    \Xv \Xv = \Av
+    \Xv \Xv = \Av.
 \\]
+The term "matrix square root" is often overloaded.
+For example, the solution to \\( \Xv^\top \Xv = \Av \\) is sometimes called matrix square roots as well, but will not be the focus of this post.
 
-Note that \\( \Xv \\) may not be diagonalizable.
+For a general square matrix \\( \Av \\), there might be zero, finitely many, or even infinitely many matrix square roots.
+We give an example for each case:
 
-\\(
-    \Xv = (1, 1; 0, -1)
-\\)
+1. $$
+\left(
+\begin{matrix}
+0 & 1 \\
+0 & 0 
+\end{matrix}
+\right)
+$$
+has no matrix square root at all (see Exercise 1 for a more general construction);
 
-## A Different Square Root
+1. $$
+\left(
+\begin{matrix}
+1 & 0 \\
+0 & 0
+\end{matrix}
+\right)
+$$
+has two square roots 
+$$
+\left(
+\begin{matrix}
+1 & 0 \\
+0 & 0
+\end{matrix}
+\right)
+$$
+and
+$$
+\left(
+\begin{matrix}
+-1 & 0 \\
+0 & 0
+\end{matrix}
+\right)
+$$;
 
-Hermitian root
+1. $$
+\left(
+\begin{matrix}
+1 & 0 \\
+0 & 1 
+\end{matrix}
+\right)
+$$
+has infinitely many square roots (not surprising),
+some of which cannot even be found by the spectral decomposition (surprise?).
 
-\\[
-    \Xv^\top \Xv = \Av
-\\]
+Our goal is to give a complete characterization of the number of square roots, and give a general formula.
+
+### **Exercises**
+1. Let \\( \Av \\) be a \\( n \times n \\) square matrix with \\( n \geq 2 \\).
+Show that \\( \Av \\) does not have a square root if \\( n \\) is the smallest number such that \\( \Av^n = 0 \\).
+
+### **References**
+Some examples are taken freely from math stack exchange, which we greatly appreciate.
