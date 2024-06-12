@@ -100,9 +100,13 @@ some of which cannot even be found by the spectral decomposition (surprise?).
 
 Our goal is to give a complete characterization of the number of square roots, and give a general formula.
 
+See the excellent note by Gallier (2008).
+
 ### **Exercises**
 1. Let \\( \Av \\) be a \\( n \times n \\) square matrix with \\( n \geq 2 \\).
 Show that \\( \Av \\) does not have a square root if \\( n \\) is the smallest number such that \\( \Av^n = 0 \\).
 
 ### **References**
 Some examples are taken freely from math stack exchange, which we greatly appreciate.
+
+Gallier, J. (2008). Logarithms and square roots of real matrices. arXiv preprint arXiv:0805.0245.
