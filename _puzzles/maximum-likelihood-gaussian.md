@@ -35,8 +35,8 @@ title: "Gaussian Maximum Likelihood Estimation: When It Does Not Exist"
 
 # {{ page.title }}
 
-In undergraduate statistics classes, we learned that the empirical mean \\( \hat\muv = \frac1n \sum_{i=1}^{n} \xv_i \\) and the empirical covariance \\( \widehat\Sigmav = \frac{1}{n} \sum_{i=1}^{n} (\xv_i - \hat\muv) (\xv_i - \hat \muv)^\top \\) are the maximum likelihood estimators for Gaussian distributions \\( \Nc(\muv, \Sigmav) \\).
-Concretely, they "minimize" the negative log likelihood:
+In undergraduate statistics classes, we learned that the empirical mean \\( \hat\muv = \frac1n \sum_{i=1}^{n} \xv_i \\) and the empirical covariance \\( \widehat\Sigmav = \frac{1}{n} \sum_{i=1}^{n} (\xv_i - \hat\muv) (\xv_i - \hat \muv)^\top \\) are the maximum likelihood estimates for Gaussian distributions \\( \Nc(\muv, \Sigmav) \\),
+because they "minimize" the negative log likelihood:
 \\[
 \hat\muv, \hat\Sigmav = \argmin_{\muv, \Sigmav} \ell(\muv, \Sigmav),
 \\]
@@ -48,8 +48,10 @@ where
 \big)
 \\).
 
-1. Show that the negative log likelihood \\( \ell(\muv, \Sigmav) \\) is a non-convex function.
-Though, a change of variable \\( \mv = \Sigmav\inv \muv \\) and \\( \Sv = \Sigmav\inv \\) makes it jointly convex:
+1. Show that \\( \ell \\) is unbounded below when the empirical covariance \\( \widehat\Sigmav \\) is singular, in which case the maximum likelihood estimate does not exist.
+
+1. Show that \\( \ell \\) is non-convex.
+Though, a change of variable \\( \mv = \Sigmav\inv \muv \\) and \\( \Sv = \Sigmav\inv \\) makes it jointly convex in \\( \mv \\) and \\( \Sv \\):
 \\[
 \ell(\mv, \Sv) =
 \frac1n \sum_{i=1}^{n} \Big(
@@ -60,11 +62,9 @@ Though, a change of variable \\( \mv = \Sigmav\inv \muv \\) and \\( \Sv = \Sigma
 \Big).
 \\]
 Note: The convexity is not by accident.
-Maximum likelihood estimation reduces to a convex optimization problem for all exponential family distributions.
+Maximum likelihood estimation reduces to a convex optimization problem for all exponential family distributions, which include Gaussian distributions.
 
-2. Show that \\( \ell \\) is unbounded below when the empirical covariance is singular, in which case the maximum likelihood estimator does not exist.
-
-3. Consider the solution path of the following regularized problem
+1. Consider the solution path of the regularized problem
 \\[
 <!-- \mv_\*(\gamma), \Sv_\*(\gamma) = \argmin_{\mv, \Sv} \ell(\mv, \Sv) + \gamma \lVert \Sv \rVert_*, -->
 \muv^\*(\gamma), \Sigmav^\*(\gamma) = \argmin_{\muv, \Sigmav} \ell(\muv, \Sigmav) + \gamma \big\lVert \Sigmav\inv \big\rVert_*,
@@ -72,7 +72,12 @@ Maximum likelihood estimation reduces to a convex optimization problem for all e
 where \\( \lVert \cdot \rVert_\* \\) denotes the nuclear norm.
 Show that \\( \lim_{\gamma \to 0} \muv^\*(\gamma) = \hat\muv \\) and \\( \lim_{\gamma \to 0} \Sigmav^\*(\gamma) = \widehat\Sigmav \\), regardless whether \\( \widehat \Sigmav \\) is singular or not.
 
-4. Redo (3) by replacing the nuclear norm with the Frobebius norm square \\( \frac12 \lVert \cdot \rVert_\F^2 \\).
+1. Redo (3) by replacing the nuclear norm with the Frobebius norm square \\( \frac12 \lVert \cdot \rVert_\F^2 \\).
 Does it change anything?
 What about other norms?
 
+Maximum likelihood is arguably the most popular method for parameter estimation in machine learning.
+However, as we have just seen, the maximum likelihood estimate does not always exist.
+Another well-known example of non-existence in machine learning is training binary logistic regression on linearly separable datasets.
+In these cases, regularization is often needed to ensure the existence (and uniqueness) of the maximum likelihood estimate.
+Taking a broader perspective, keep in mind that there are numerous parameter estimation methods beyond maximum likelihood, e.g., the method of moments and maximum entropy estimation.
