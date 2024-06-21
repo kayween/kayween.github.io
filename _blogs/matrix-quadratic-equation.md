@@ -5,7 +5,7 @@ title: Matrix Quadratic Equations
 # {{ page.title }}
 
 Everyone knows how to solve a univariate quadratic equation \\( a x^2 + b x + c = 0 \\).
-But it is less obvious how to solve its matrix variant
+But it is less obvious how to solve \\( \Xv \\) in the matrix equation 
 \\[
     \Xv^\top \Av \Xv + \tfrac12 \Bv^\top \Xv + \tfrac12 \Xv^\top \Bv + \Cv = 0,
 \\]
