@@ -2,37 +2,6 @@
 layout: base
 title: "Gaussian Maximum Likelihood Estimation: When It Does Not Exist"
 ---
-
-\\[
-\newcommand{\Sb}{\mathbb{S}}
-\newcommand{\zero}{\mathbf{0}}
-\newcommand{\Eb}{\mathbb{E}}
-\newcommand{\Av}{\mathbf{A}}
-\newcommand{\Xv}{\mathbf{X}}
-\newcommand{\Iv}{\mathbf{I}}
-\newcommand{\wv}{\mathbf{w}}
-\newcommand{\xv}{\mathbf{x}}
-\newcommand{\zv}{\mathbf{z}}
-\newcommand{\Sv}{\mathbf{S}}
-\newcommand{\mv}{\mathbf{m}}
-\newcommand{\Ds}{\mathsf{D}}
-\newcommand{\KL}{\mathrm{KL}}
-\DeclareMathOperator*{\maxi}{\mathrm{maximize}}
-\newcommand{\Qc}{\mathcal{Q}}
-\newcommand{\Nc}{\mathcal{N}}
-\newcommand{\Dc}{\mathcal{D}}
-\newcommand{\muv        }{\boldsymbol \mu        }
-\newcommand{\Sigmav     }{\boldsymbol \Sigma     }
-\newcommand{\lambdav    }{\boldsymbol \lambda    }
-\newcommand{\Lambdav    }{\boldsymbol \Lambda    }
-\newcommand{\inv}{^{-1}}
-\newcommand{\F}{\mathrm{F}}
-\\]
-
-\\[
-\DeclareMathOperator*{\argmin}{argmin}
-\\]
-
 # {{ page.title }}
 
 In undergraduate statistics classes, we learned that the empirical mean \\( \hat\muv = \frac1n \sum_{i=1}^{n} \xv_i \\) and the empirical covariance \\( \widehat\Sigmav = \frac{1}{n} \sum_{i=1}^{n} (\xv_i - \hat\muv) (\xv_i - \hat \muv)^\top \\) are the maximum likelihood estimates for Gaussian distributions \\( \Nc(\muv, \Sigmav) \\),
@@ -80,4 +49,4 @@ Maximum likelihood is arguably the most popular method for parameter estimation 
 However, as we have just seen, the maximum likelihood estimate does not always exist.
 Another well-known example of non-existence in machine learning is training binary logistic regression on linearly separable datasets.
 In these cases, regularization is often needed to ensure the existence (and uniqueness) of the maximum likelihood estimate.
-Taking a broader perspective, keep in mind that there are numerous parameter estimation methods beyond maximum likelihood, e.g., the method of moments and maximum entropy estimation.
+Taking a broader perspective, keep in mind that there are numerous parameter estimation methods beyond maximum likelihood, e.g., the method of moments and maximum entropy estimation (cool stuff that uses convex optimization).

@@ -6,7 +6,6 @@ title: "Variational Inference: Adding Data Reduces the Approximate Uncertainty?"
 
 Given a dataset \\( \Dc = \\{(\xv_i, y_i)\\} _ {i=1}^{n} \\), a prior \\( p(\wv) \\), and a likelihood \\( p(\Dc \mid \wv) = \prod_{i=1}^{n} p((\xv_i, y_i) \mid \wv) \\), variational inference approximates the posterior distribution \\( p(\wv \mid \Dc) \\) by minimizing the Kullback–Leibler divergence
 \\[
-\DeclareMathOperator*{\mini}{\mathrm{minimize}}
     \mini_{q \in \Qc} \Ds_\KL(q, p(\wv \mid \Dc)),
 \\]
 where \\( \Qc \\) is a variational family.
@@ -18,7 +17,7 @@ We assume the prior \\( p(\wv) \\) is a standard Gaussian \\( \Nc(\zero, \Iv) \\
 
 1. Show that there exists a unique optimal variational distribution \\( q^* \\).
 
-1. Let \\( \Nc(\muv_m, \Sigmav_m) = \argmin_{q \in \Qc} \Ds_\KL\big(q, p(\wv \mid \Dc)) \\) be the optimal variational distribution with the first \\( m \\) data points only.
+1. Let \\( \Nc(\muv_m, \Sigmav_m) = \argmin_{q \in \Qc} \Ds_\KL\big(q, p(\wv \mid \\{(\xv_i, y_i)\\} _ {i=1}^{m})\big) \\) be the optimal variational distribution with the first \\( m \\) data points only.
 Show that \\( \Iv \succeq \Sigmav_1 \succeq \Sigmav_2 \succeq \cdots \succeq \Sigmav_n \\).
 
 1. Show that the above inequalities become strict if the likelihood \\( p((\xv_i, y_i) \mid \wv) \\) is strictly log-concave in \\( \wv \\) for all \\( i \\).
@@ -28,7 +27,7 @@ That is, the posterior uncertainty contracts with more data.
 Necessarily, the likelihood \\( p((\xv, y) \mid \wv) \\) cannot be log-concave in \\( \wv \\).
 
 Let's appreciate the results so far for a moment.
-In the above setting, the approximate posterior contracts regardless of the label \\( y \\), as long as the likelihood is strictly log-concave.
+The approximate posterior contracts regardless of the label, as long as the likelihood is strictly log-concave.
 This might be counter-intuitive in some cases.
 For example, consider variational Bayesian logistic regression on a linearly separable dataset.
 Adding outliers to the dataset, after which the data becomes non-separable, strictly reduces the posterior uncertainty!
