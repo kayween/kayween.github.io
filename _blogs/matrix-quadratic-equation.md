@@ -2,43 +2,6 @@
 layout: base
 title: Matrix Quadratic Equations
 ---
-
-\\[
-\newcommand{\Sb}{\mathbb{S}}
-\newcommand{\Rb}{\mathbb{R}}
-\newcommand{\zero}{\mathbf{0}}
-\newcommand{\Eb}{\mathbb{E}}
-\newcommand{\Av}{\mathbf{A}}
-\newcommand{\Bv}{\mathbf{B}}
-\newcommand{\Cv}{\mathbf{C}}
-\newcommand{\Gv}{\mathbf{G}}
-\newcommand{\Qv}{\mathbf{Q}}
-\newcommand{\Sv}{\mathbf{S}}
-\newcommand{\Uv}{\mathbf{U}}
-\newcommand{\Vv}{\mathbf{V}}
-\newcommand{\Xv}{\mathbf{X}}
-\newcommand{\Iv}{\mathbf{I}}
-\newcommand{\xv}{\mathbf{x}}
-\newcommand{\zv}{\mathbf{z}}
-\newcommand{\Sv}{\mathbf{S}}
-\newcommand{\mv}{\mathbf{m}}
-\newcommand{\Ds}{\mathsf{D}}
-\newcommand{\KL}{\mathrm{KL}}
-\DeclareMathOperator*{\maxi}{\mathrm{maximize}}
-\newcommand{\Qc}{\mathcal{Q}}
-\newcommand{\Nc}{\mathcal{N}}
-\newcommand{\muv        }{\boldsymbol \mu        }
-\newcommand{\Sigmav     }{\boldsymbol \Sigma     }
-\newcommand{\lambdav    }{\boldsymbol \lambda    }
-\newcommand{\Lambdav    }{\boldsymbol \Lambda    }
-\newcommand{\inv}{^{-1}}
-\newcommand{\F}{\mathrm{F}}
-\\]
-
-\\[
-\DeclareMathOperator*{\argmin}{argmin}
-\\]
-
 # {{ page.title }}
 
 Everyone knows how to solve a univariate quadratic equation \\( a x^2 + b x + c = 0 \\).
