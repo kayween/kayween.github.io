@@ -12,8 +12,26 @@ We are interested in computing the probability of the form
 \end{equation}
 \\]
 where \\(\phi(\xv) \propto \exp(-\frac12 \xv^\top \xv)\\) is the \\(d\\)-dimensional standard Gaussian density and \\(\Lv = (l_{ij}) \in \Rb^{d \times d}\\) is an invertible lower triangular matrix.
-
+At a first glance, this problem seems very restrictive.
 <!-- Let \\( \Av = \Lv \Qv \\) be the LQ decomposition of \\( \Av \\). -->
+
+#### **Non-triangular Matrices**
+We consider the seemingly more general case \\(\Pr(\vv \leq \Av \xv \leq \uv)\\), where \\(\Av \in \Rb^{d \times d}\\) is not necessarily triangular.
+Let \\(\Av = \Lv \Qv\\) be the LQ decomposition.
+Then, a change of variable \\(\xv = \Qv^\top \zv\\) reduces the problem to the triangular case \\(\Pr(\vv \leq \Lv \zv \leq \uv)\\), where \\(\zv\\) is a standard Gaussian random variable.
+
+#### **Non-square Wide Matrices**
+
+#### **Non-standard Gaussians**
+Let \\(\xv \sim \Nc(\muv, \Sigmav)\\) be a non-standard Gaussian variable.
+Let \\(\Lv \Lv^\top = \Sigmav\\) be the Cholesky decomposition.
+Then, a change of variable \\(\xv = \Lv \zv + \muv\\) yields
+\\[
+    \Pr(\vv \leq \Av \xv \leq \uv) = \Pr(\vv - \Av \muv \leq \Av\Lv \cdot \zv \leq \uv + \Av \muv),
+\\]
+where \\(\zv\\) is a standard Gaussian random variable.
+
+## Separation of Variables
 
 Consider the probability density of the form
 \\[
@@ -28,3 +46,6 @@ We estimate it with importance sampling \ref{eq:fuck}
 \\[
     \int_adsf
 \\]
+
+## Related Work 
+For instance, 
