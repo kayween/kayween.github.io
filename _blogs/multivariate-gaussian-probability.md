@@ -26,7 +26,14 @@ and let
 \\[
     p(x_i \mid x_1, x_2, \cdots, x_{i-1}) = \frac{\phi(x_i) \cdot \mathbb{1}[\tilde v_i \leq x_i \leq \tilde u_i]}{\Phi(\tilde u_i) - \Phi(\tilde v_i)}.
 \\]
-We estimate it with importance sampling \ref{eq:fuck}
+Using \\(p(\xv)\\) as the importance weight \eqref{eq:fuck} yields
 \\[
-    \int_adsf 
+\int_{\vv \leq \Lv \xv \leq \uv} \phi(\xv) \diff \xv
+=
+\int \frac{\phi(\xv)}{p(\xv)} \cdot p(\xv) \diff \xv
+=
+\Eb_{\xv \sim p(\xv)}\left[\prod_{i=1}^{d} \Big(\Phi(\tilde u_i) - \Phi(\tilde v_i)\Big) \right],
 \\]
+where the right hand side is readily estimated by Monte Carlo samples.
+
+### **Exercises**
