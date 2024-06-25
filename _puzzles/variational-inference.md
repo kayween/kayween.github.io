@@ -56,6 +56,7 @@ The likelihood is
     p((\xv_i, y_i) \mid \wv) = \Nc(y_i; \wv^\top \xv_i, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\Big(-\frac{1}{2\sigma^2} \lVert y_i - \wv^\top \xv_i \rVert^2\Big),
 \\]
 where \\(\sigma > 0\\) is the noise standard deviation.
+The log-likelihood is a negative quadratic function, which of course is concave.
 The maximizer of ELBO \eqref{eq:elbo} has a closed-form
 \\[
 \Nc\bigg(
@@ -71,5 +72,5 @@ The likelihood is
     p((\xv_i, y_i) \mid \wv) = y_i \cdot s(\wv^\top \xv_i) + (1 - y_i) \cdot (1 - s(\wv^\top \xv_i)),
 \\]
 where \\(s(\cdot)\\) is the sigmoid function and \\(y_i \in \\{0, 1\\}\\).
-The ELBO \eqref{eq:elbo} does not have a closed-form maximizer and thus has to rely on stochastic optimization.
 One can verify the likelihood is indeed strictly log-concave in \\(\wv\\).
+The ELBO \eqref{eq:elbo} does not have a closed-form maximizer in this case, and thus we have to resort to stochastic optimization.
