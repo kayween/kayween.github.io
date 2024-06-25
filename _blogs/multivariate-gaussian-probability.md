@@ -4,16 +4,18 @@ title: Multivariate Gaussian Probability
 ---
 # {{ page.title }}
 
-We are interested in computing the probability of the form
+Given a multivariate standard Gaussian random variable \\(\xv \sim \Nc(\zero, \Iv)\\), we are interested in the probability of the form
 \\[
 \begin{equation}
 \label{eq:fuck}
-    \int_{\vv \leq \Lv \xv \leq \uv} \phi(\xv) \diff \xv,
+    \Pr(\vv \leq \Lv \xv \leq \uv) = \int_{\vv \leq \Lv \xv \leq \uv} \phi(\xv) \diff \xv,
 \end{equation}
 \\]
-where \\(\phi(\xv) \propto \exp(-\frac12 \xv^\top \xv)\\) is the \\(d\\)-dimensional standard Gaussian density and \\(\Lv = (l_{ij}) \in \Rb^{d \times d}\\) is an invertible lower triangular matrix.
+where \\(\phi(\xv) \propto \exp(-\frac12 \xv^\top \xv)\\) is the \\(d\\)-dimensional standard Gaussian density and \\(\Lv = (l_{ij}) \in \Rb^{d \times d}\\) is a nonsingular lower triangular matrix.
 
 <!-- Let \\( \Av = \Lv \Qv \\) be the LQ decomposition of \\( \Av \\). -->
+
+## Separation of Variables
 
 Consider the probability density of the form
 \\[
@@ -26,5 +28,5 @@ and let
 \\]
 We estimate it with importance sampling \ref{eq:fuck}
 \\[
-    \int_adsf
+    \int_adsf 
 \\]
