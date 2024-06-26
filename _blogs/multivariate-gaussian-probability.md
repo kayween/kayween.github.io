@@ -31,8 +31,7 @@ Then, a change of variable \\(\xv = \Lv \zv + \muv\\) yields
 \\]
 where \\(\zv\\) is a standard Gaussian random variable.
 
-## Separation of Variables
-
+## Monte Carlo Estimate by Separation of Variables
 Consider the probability density of the form
 \\[
     <!-- p(\xv) = p_1(x_1) p_2(x_2 \mid x_1) \cdots p_d(x_d \mid x_1, x_2, \cdots, x_{d-1}) -->
@@ -51,7 +50,7 @@ Using \\(p(\xv)\\) as the importance weight \eqref{eq:fuck} yields
 \Eb_{\xv \sim p(\xv)}\left[\prod_{i=1}^{d} \Big(\Phi(\tilde u_i) - \Phi(\tilde v_i)\Big) \right],
 \\]
 
-## Related Work 
+## Discussion
 For instance, 
 where the right hand side is readily estimated by Monte Carlo samples.
 
