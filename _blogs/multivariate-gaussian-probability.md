@@ -4,11 +4,11 @@ title: Multivariate Gaussian Probability
 ---
 # {{ page.title }}
 
-We are interested in computing the probability of the form
+Given a multivariate standard Gaussian random variable \\(\xv \sim \Nc(\zero, \Iv)\\), we are interested in the probability of the form
 \\[
 \begin{equation}
 \label{eq:fuck}
-    \int_{\vv \leq \Lv \xv \leq \uv} \phi(\xv) \diff \xv,
+    \Pr(\vv \leq \Lv \xv \leq \uv) = \int_{\vv \leq \Lv \xv \leq \uv} \phi(\xv) \diff \xv,
 \end{equation}
 \\]
 where \\(\phi(\xv) \propto \exp(-\frac12 \xv^\top \xv)\\) is the \\(d\\)-dimensional standard Gaussian density and \\(\Lv = (l_{ij}) \in \Rb^{d \times d}\\) is an invertible lower triangular matrix.
@@ -42,10 +42,17 @@ and let
 \\[
     p(x_i \mid x_1, x_2, \cdots, x_{i-1}) = \frac{\phi(x_i) \cdot \mathbb{1}[\tilde v_i \leq x_i \leq \tilde u_i]}{\Phi(\tilde u_i) - \Phi(\tilde v_i)}.
 \\]
-We estimate it with importance sampling \ref{eq:fuck}
+Using \\(p(\xv)\\) as the importance weight \eqref{eq:fuck} yields
 \\[
-    \int_adsf
+\int_{\vv \leq \Lv \xv \leq \uv} \phi(\xv) \diff \xv
+=
+\int \frac{\phi(\xv)}{p(\xv)} \cdot p(\xv) \diff \xv
+=
+\Eb_{\xv \sim p(\xv)}\left[\prod_{i=1}^{d} \Big(\Phi(\tilde u_i) - \Phi(\tilde v_i)\Big) \right],
 \\]
 
 ## Related Work 
 For instance, 
+where the right hand side is readily estimated by Monte Carlo samples.
+
+### **Exercises**
