@@ -32,16 +32,20 @@ Then, a change of variable \\(\xv = \Lv \zv + \muv\\) yields
 where \\(\zv\\) is a standard Gaussian random variable.
 
 ## Monte Carlo Estimate by Separation of Variables
+Let \\(x_{1:i-1}\\) denote the first \\(i-1\\) coordinates in \\(\xv\\).
 Consider the probability density of the form
 \\[
-    <!-- p(\xv) = p_1(x_1) p_2(x_2 \mid x_1) \cdots p_d(x_d \mid x_1, x_2, \cdots, x_{d-1}) -->
-    p(\xv) = \prod_{i=1}^{d} p_i(x_i \mid x_{1:i-1})
+\begin{equation}
+\label{eq:importance-dist}
+    p(\xv) = \prod_{i=1}^{d} p_i(x_i \mid x_{1:i-1}),
+\end{equation}
+}
 \\]
-and let
+where
 \\[
-    p(x_i \mid x_1, x_2, \cdots, x_{i-1}) = \frac{\phi(x_i) \cdot \mathbb{1}[\tilde v_i \leq x_i \leq \tilde u_i]}{\Phi(\tilde u_i) - \Phi(\tilde v_i)}.
+    p_i(x_i \mid x_{1:i-1}) = \frac{\phi(x_i) \cdot \mathbb{1}[\tilde v_i \leq x_i \leq \tilde u_i]}{\Phi(\tilde u_i) - \Phi(\tilde v_i)}.
 \\]
-Using \\(p(\xv)\\) as the importance weight \eqref{eq:fuck} yields
+Using \\(p(\xv)\\) as the importance weight to estimate \eqref{eq:fuck} yields
 \\[
 \int_{\vv \leq \Lv \xv \leq \uv} \phi(\xv) \diff \xv
 =
@@ -49,9 +53,12 @@ Using \\(p(\xv)\\) as the importance weight \eqref{eq:fuck} yields
 =
 \Eb_{\xv \sim p(\xv)}\left[\prod_{i=1}^{d} \Big(\Phi(\tilde u_i) - \Phi(\tilde v_i)\Big) \right],
 \\]
+where the right hand side is readily estimated by Monte Carlo samples.
 
 ## Discussion
 For instance, 
-where the right hand side is readily estimated by Monte Carlo samples.
+
+We have not covered the case where the matrix \\(\Av\\) has more rows than columns, i.e., a tall matrix.
+As far as I know, dealing with general matrices is hard, which has to rely on Markov chain Monte Carlo methods and sophisticated numerical integration methods.
 
 ### **Exercises**
