@@ -33,17 +33,15 @@ A change of variables \\(\xv = \Lv \zv + \muv\\), where \\(\zv\\) is standard no
 
 ## Monte Carlo Estimate by Separation of Variables
 We are going to use importance sampling to estimate the integral \eqref{eq:normal-prob}.
-Separatino of variables 
-
-The linear inequality constraint \\(\vv \leq \Lv \xv \leq \uv\\) can be rewritten as
+Since \\(\Av\\) is lower triangular, the linear inequality constraint \\(\vv \leq \Av \xv \leq \uv\\) can be rewritten as
 \\[
-    \frac{1}{l_{ii}} \Big(v_i - \sum_{j=1}^{i-1} l_{ij} x_j \Big)
-    \leq x_i \leq
-    \frac{1}{l_{ii}} \Big(u_i - \sum_{j=1}^{i-1} l_{ij} x_j \Big), \quad i = 1, 2, \cdots, d.
+    \tilde v_i \leq x_i \leq \tilde u_i, \quad i = 1, 2, \cdots, d,
 \\]
+where \\(\tilde v_i = \frac{1}{a_{ii}} \Big(v_i - \sum_{j=1}^{i-1} a_{ij} x_j \Big)\\)  and \\(\tilde u_i = \frac{1}{a_{ii}} \Big(u_i - \sum_{j=1}^{i-1} a_{ij} x_j \Big)\\).
+Note that \\(\tilde v_i\\) and \\(\tilde u_i\\) are functions of the first \\(i-1\\) coordinates only.
 
 Let \\(x_{1:i-1}\\) denote the first \\(i-1\\) coordinates in \\(\xv\\).
-Consider the probability density of the form
+Consider the probability distribution of the form
 \\[
 \begin{equation}
 \label{eq:importance-dist}
@@ -54,10 +52,11 @@ where
 \\[
 \begin{equation}
 \label{eq:conditional}
-    p_i(x_i \mid x_{1:i-1}) = \frac{\phi(x_i) \cdot \mathbb{1}[\tilde v_i \leq x_i \leq \tilde u_i]}{\Phi(\tilde u_i) - \Phi(\tilde v_i)}.
+    p_i(x_i \mid x_{1:i-1}) = \frac{\phi(x_i) \cdot \mathbf{1}[\tilde v_i \leq x_i \leq \tilde u_i]}{\Phi(\tilde u_i) - \Phi(\tilde v_i)}.
 \end{equation}
 \\]
 
+Sampling from \eqref{eq:importance-dist} is easy, because each \\(p_i\\) is a univariate truncated normal distribution.
 Using \\(p(\xv)\\) as the importance weight to estimate \eqref{eq:normal-prob} yields
 \\[
 \eqref{eq:normal-prob}
@@ -70,7 +69,7 @@ where the right hand side is readily estimated by Monte Carlo samples.
 
 ## Discussion
 Estimating the normal probability is of immerse importance in practice.
-For instance, the cumulative distribution function (CDF) of a multivariate normal distribution is exactly of the form \eqref{eq:normal-prob} with \\(\Lv = \Iv\\) and \\(\vv = -\infty\\).
+For instance, the cumulative distribution function (CDF) of a multivariate normal distribution is exactly of the form \eqref{eq:normal-prob} with \\(\Av = \Iv\\) and \\(\vv = -\infty\\).
 When the normal distribution does not have independent coordinates, there is no easy way to compute its CDF, and thus we have to rely on Monte Carlo methods.
 Yes, the method we just presented still works when \\(\vv\\) is infinity, but we leave it as an exercise for the readers to verify it is indeed the case.
 
@@ -91,7 +90,9 @@ A careful reader will notice that we have ignored the case when the matrix \\(\A
 In fact, this is a hard one, which has to rely on Markov chain Monte Carlo methods combined with sophisticated numerical integration methods.
 
 ### **Exercises**
-1. Show the distribution \eqref{eq:importance-dist} is not the truncated normal distribution \\(\phi(\xv \mid \vv \leq \Lv \xv \leq \uv)\\).
+1. Show the distribution \eqref{eq:importance-dist} is not the truncated normal distribution \\(\phi(\xv \mid \vv \leq \Av \xv \leq \uv)\\).
+
+2. Compared to \eqref{eq:importance-dist}, is it sensible to use instead the uniform distribution over the polytope \\(\\{\xv \in \Rb^d: \vv \leq \Av \xv \leq \uv\\}\\) as the importance distribution? Why or why not?
 
 ### **References**
 Botev, Z. I. (2017). The normal law under linear restrictions: simulation and estimation via minimax tilting. Journal of the Royal Statistical Society Series B: Statistical Methodology, 79(1), 125-148.
