@@ -2,37 +2,6 @@
 layout: base
 title:  "Properties of the Log Determinant"
 ---
-
-\\[
-\newcommand{\Sb}{\mathbb{S}}
-\newcommand{\zero}{\mathbf{0}}
-\newcommand{\Eb}{\mathbb{E}}
-\newcommand{\Av}{\mathbf{A}}
-\newcommand{\Xv}{\mathbf{X}}
-\newcommand{\Iv}{\mathbf{I}}
-\newcommand{\wv}{\mathbf{w}}
-\newcommand{\xv}{\mathbf{x}}
-\newcommand{\zv}{\mathbf{z}}
-\newcommand{\Sv}{\mathbf{S}}
-\newcommand{\mv}{\mathbf{m}}
-\newcommand{\Ds}{\mathsf{D}}
-\newcommand{\KL}{\mathrm{KL}}
-\DeclareMathOperator*{\maxi}{\mathrm{maximize}}
-\newcommand{\Qc}{\mathcal{Q}}
-\newcommand{\Nc}{\mathcal{N}}
-\newcommand{\Dc}{\mathcal{D}}
-\newcommand{\muv        }{\boldsymbol \mu        }
-\newcommand{\Sigmav     }{\boldsymbol \Sigma     }
-\newcommand{\lambdav    }{\boldsymbol \lambda    }
-\newcommand{\Lambdav    }{\boldsymbol \Lambda    }
-\newcommand{\inv}{^{-1}}
-\newcommand{\F}{\mathrm{F}}
-\\]
-
-\\[
-\DeclareMathOperator*{\argmin}{argmin}
-\\]
-
 # {{ page.title }}
 
 It is well known that \\( f(\Xv) = -\log\det \Xv \\) is a convex function on the positive definite cone \\( \Sb_{+ +}^d \\).
