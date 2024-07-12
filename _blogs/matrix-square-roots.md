@@ -2,42 +2,7 @@
 layout: base
 title: Matrix Square Roots
 ---
-
-\\[
-\newcommand{\Sb}{\mathbb{S}}
-\newcommand{\Rb}{\mathbb{R}}
-\newcommand{\zero}{\mathbf{0}}
-\newcommand{\Eb}{\mathbb{E}}
-\newcommand{\Av}{\mathbf{A}}
-\newcommand{\Bv}{\mathbf{B}}
-\newcommand{\Cv}{\mathbf{C}}
-\newcommand{\Gv}{\mathbf{G}}
-\newcommand{\Qv}{\mathbf{Q}}
-\newcommand{\Sv}{\mathbf{S}}
-\newcommand{\Uv}{\mathbf{U}}
-\newcommand{\Vv}{\mathbf{V}}
-\newcommand{\Xv}{\mathbf{X}}
-\newcommand{\Iv}{\mathbf{I}}
-\newcommand{\xv}{\mathbf{x}}
-\newcommand{\zv}{\mathbf{z}}
-\newcommand{\Sv}{\mathbf{S}}
-\newcommand{\mv}{\mathbf{m}}
-\newcommand{\Ds}{\mathsf{D}}
-\newcommand{\KL}{\mathrm{KL}}
-\DeclareMathOperator*{\maxi}{\mathrm{maximize}}
-\newcommand{\Qc}{\mathcal{Q}}
-\newcommand{\Nc}{\mathcal{N}}
-\newcommand{\muv        }{\boldsymbol \mu        }
-\newcommand{\Sigmav     }{\boldsymbol \Sigma     }
-\newcommand{\lambdav    }{\boldsymbol \lambda    }
-\newcommand{\Lambdav    }{\boldsymbol \Lambda    }
-\newcommand{\inv}{^{-1}}
-\newcommand{\F}{\mathrm{F}}
-\\]
-
-\\[
-\DeclareMathOperator*{\argmin}{argmin}
-\\]
+# {{ page.title }}
 
 This blog post discusses matrix square roots.
 A matrix square root of a \\( n \times n \\) square matrix \\( \Av \\) is defined as any solution to the equation
@@ -90,13 +55,12 @@ $$;
 1. $$
 \left(
 \begin{matrix}
-1 & 0 \\
-0 & 1 
+0 & 0 \\
+0 & 0 
 \end{matrix}
 \right)
 $$
-has infinitely many square roots (not surprising),
-some of which cannot even be found by the spectral decomposition (surprise?).
+has infinitely many square roots, some of which cannot even be found by the spectral decomposition (surprise?).
 
 Our goal is to give a complete characterization of the number of square roots, and give a general formula.
 
