@@ -4,6 +4,8 @@ title: "Variational Inference: Does Adding Data Reduce the Approximate Posterior
 ---
 # {{ page.title }}
 
+**This problem has a critical bug and will be updated in the future.**
+
 Given a dataset \\( \Dc = \\{(\xv_i, y_i)\\} _ {i=1}^{n} \\), a prior \\( p(\wv) \\), and a likelihood \\( p(\Dc \mid \wv) = \prod_{i=1}^{n} p((\xv_i, y_i) \mid \wv) \\), variational inference approximates the posterior \\( p(\wv \mid \Dc) \\) by minimizing the Kullback–Leibler divergence
 \\(
     <!-- \mini_{q \in \Qc} -->
