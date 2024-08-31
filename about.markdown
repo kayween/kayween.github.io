@@ -1,6 +1,6 @@
 ---
 layout: base
-title: Machine Learning Exercises
+title: Exercises
 permalink: /about/
 ---
 
