@@ -4,7 +4,21 @@ title: Multivariate Normal Probability
 ---
 # {{ page.title }}
 
-Given a multivariate standard normal random variable \\(\xv \sim \Nc(\zero, \Iv)\\), we are interested in estimating the (intractable) probability of the form
+The cumulative distribution function (CDF) is arguably the most basic property of a distribution.
+The multivariate normal distribution is probably the most basic and frequently used distribution in practice.
+Yet, perhaps surprisingly, the CDF of a multivariate normal distribution is intractable in general.
+That is, there is no "easy" way to compute the probability
+\\[
+    \Pr(\xv \leq \uv), \; \text{where} \; \xv \sim \Nc(\muv, \Sigmav).
+\\]
+Closed-form expressions do exist for special cases, e.g., \\(\xv\\) is univariate or has independent coordinates.
+However, no analytical expressions exist in general.
+The arising question is how to numerically estimate the probability, which will be the focus of this post.
+
+## Problem
+We are going to formulate the problem slightly more general than the normal CDF.
+
+Given a multivariate standard normal random variable \\(\xv \sim \Nc(\zero, \Iv)\\), we are interested in estimating the probability of the form
 \\[
 \begin{equation}
 \label{eq:normal-prob}
@@ -12,11 +26,7 @@ Given a multivariate standard normal random variable \\(\xv \sim \Nc(\zero, \Iv)
 \end{equation}
 \\]
 where \\(\phi(\xv) \propto \exp(-\frac12 \xv^\top \xv)\\) is the standard normal density and \\(\Av\\) is a \\(d \times d\\) nonsingular lower triangular matrix.
-The seemingly more general case where \\(\Av \in \Rb^{m \times d}\\) is row full rank and \\(\xv\\) is non-standard normal reduces to \eqref{eq:normal-prob} by a change of variables.
-
-Estimating the normal probability is of immerse importance.
-The cumulative distribution function (CDF) of a multivariate normal distribution is a special case of \eqref{eq:normal-prob} with \\(\Av = \Iv\\) and \\(\vv = -\infty\\).
-When the normal distribution does not have independent coordinates, there is no easy way to compute its CDF, and thus we have to rely on Monte Carlo methods, which is the focus of this post.
+The seemingly more general case where \\(\Av \in \Rb^{m \times d}\\) is not square (but still row full rank) and \\(\xv\\) is non-standard normal reduces to \eqref{eq:normal-prob} by a change of variables.
 
 #### **Non-Triangular Square Matrices**
 Suppose \\(\Av\\) is square.
