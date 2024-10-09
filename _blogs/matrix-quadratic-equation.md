@@ -25,13 +25,13 @@ Before dealing with the general case \eqref{eq:symmetric-equation}, we must solv
 \end{equation}
 \\]
 where \\(\Sv\\) is symmetric positive semi-definite.
-This special is simpler thanks to the absence of the linear term, and is covered by the following lemma (Crone, 1981, Proposition 3).
+This special case is simpler due to the the absence of the linear term, and is covered by the following lemma (Crone, 1981, Proposition 3).
 
 **Lemma 1.**
 <i>
 Let \\(\Xv \in \Rb^{m \times n}\\) and let \\(\Sv\\) be a \\(n \times n\\) symmetric positive semi-definite matrix with rank \\(r\\).
 Then, the matrix equation \eqref{eq:special-case} has a root if and only if \\(m \geq r\\).
-The roots are of the form
+The roots, if exist, are of the form
 \\[
     \Xv = \Vv \Lambdav^{\frac12} \Uv^\top = \Vv \Uv^\top \Sv^{\frac12},
 \\]
@@ -70,7 +70,7 @@ since
 ## The General Case
 
 Now we are ready to tackle the general form of the matrix quadratic equation \eqref{eq:symmetric-equation}.
-The idea is exactly the same as in the univariate case: completing the square.
+The idea is based on completing the square.
 Observe that the equation \eqref{eq:symmetric-equation} can be rewritten as
 \\[
 \big(\Av^{\frac12} \Xv + \tfrac12 \Av^{-\frac12} \Bv\big)^\top
@@ -79,19 +79,19 @@ Observe that the equation \eqref{eq:symmetric-equation} can be rewritten as
 \frac14 \big(\Bv^\top \Av\inv \Bv - 4 \Cv\big).
 \\]
 Let \\(\Gv = \Bv^\top \Av\inv \Bv - 4 \Cv\\) and call it the discriminant.
-Apparently, \\(\Gv\\) has to be symmetric positive semi-definite for the solution to exist, since the left hand side is symmetric positive semi-definite.
-Assuming it is, then invoking Lemma 1 gives a general formula for all roots:
+Clearly, \\(\Gv\\) has to be symmetric positive semi-definite for the solution to exist, since the left hand side is symmetric positive semi-definite.
+Assuming it is, then invoking Lemma 1 gives a general root formula:
 \\[
     -\frac12 \Av\inv \Bv + \frac12 \Av^{-\frac12} \Vv \Uv^\top \Gv^{\frac12},
 \\]
 where \\( \Uv \\) is a column orthonormal matrix consisting of the eigenvectors of \\( \Gv \\), and \\( \Vv \\) is an arbitrary column orthonormal matrix (with an appropriate size).
 One can verify that this formula reduces to the usual univariate quadratic formula when all matrices are \\( 1 \times 1 \\).
-The matrix quadratic equation has infinitely many roots in most cases, particularly when the discriminant is (strictly) positive definite, because there are infinitely many choices for the column orthonormal matrix \\(\Vv\\).
+The matrix quadratic equation has infinitely many roots in most cases, e.g., when the discriminant is positive definite, because there are infinitely many choices for the column orthonormal matrix \\(\Vv\\).
 In the univariate case, however, \\(\Vv\\) is either \\(1\\) or \\( -1 \\), which yields at most two roots.
 
 ## An Asymmetric Variant
 
-Now consider the following "asymmetric" variant
+Now consider the following asymmetric variant
 \\[
 \begin{equation}
 \label{eq:asymmetric-equation}
@@ -112,7 +112,7 @@ However, as tempting as it is, this argument has a bug.
 Finding the logical bug is left as an exercise to the readers.
 
 It turns out that the asymmetric matrix quadratic equation is much harder to solve.
-Crone (1981) did not obtain a complete solution when the discriminant is singular,
+Crone (1981) did not obtain a complete solution to the asymmetric equation when the discriminant is singular,
 and only gave a solution when the discriminant is positive definite.
 The result, however, is much messier and hence is omitted here.
 It wasn't until recently that a general solution was discovered (Yuan et al., 2021).
