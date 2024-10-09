@@ -4,37 +4,36 @@ title: Multivariate Normal Probability
 ---
 # {{ page.title }}
 
-The cumulative distribution function (CDF) is arguably the most basic property of a distribution.
-The multivariate normal distribution is probably the most basic and frequently used distribution in practice.
-Yet, perhaps surprisingly, the CDF of a multivariate normal distribution is intractable in general.
-That is, there is no "easy" way to compute the probability
+The behavior of a random variable is fully described by its cumulative distribution function (CDF).
+The multivariate normal distribution is one of the most widely used distributions in practice.
+Yet, perhaps surprisingly, the CDF of multivariate normal distributions is intractable.
+That is, there is no "easy" way to compute the multivariate normal probability
 \\[
     \Pr(\xv \leq \uv), \; \text{where} \; \xv \sim \Nc(\muv, \Sigmav).
 \\]
-Closed-form expressions do exist for special cases, e.g., \\(\xv\\) is univariate or has independent coordinates.
-However, no analytical expressions exist in general.
-The arising question is how to numerically estimate the probability, which will be the focus of this post.
+Analytical expressions only exist for special cases, e.g., \\(\xv\\) is univariate or has independent coordinates.
+However, no analytical expressions exist in general, so one has to resort to Monte Carlo methods to numerically estimate the probability.
 
 ## Problem
-We are going to formulate the problem slightly more general than the normal CDF.
+We are going to adopt a formulation slightly more general than the multivariate normal CDF.
 
-Given a multivariate standard normal random variable \\(\xv \sim \Nc(\zero, \Iv)\\), we are interested in estimating the probability of the form
+Given a multivariate standard normal random variable \\(\xv \sim \Nc(\zero, \Iv)\\), we are interested in estimating the multivariate normal probability under linear inequality constraints:
 \\[
 \begin{equation}
 \label{eq:normal-prob}
     \Pr(\vv \leq \Av \xv \leq \uv) = \int_{\vv \leq \Lv \xv \leq \uv} \phi(\xv) \diff \xv,
 \end{equation}
 \\]
-where \\(\phi(\xv) \propto \exp(-\frac12 \xv^\top \xv)\\) is the standard normal density and \\(\Av\\) is a \\(d \times d\\) nonsingular lower triangular matrix.
-The seemingly more general case where \\(\Av \in \Rb^{m \times d}\\) is not square (but still row full rank) and \\(\xv\\) is non-standard normal reduces to \eqref{eq:normal-prob} by a change of variables.
+where \\(\phi(\xv) \propto \exp(-\frac12 \xv^\top \xv)\\) is the standard normal density and \\(\Av\\) is a \\(d \times d\\) full rank lower triangular matrix.
+The seemingly more general case where \\(\Av \in \Rb^{m \times d}\\) is not triangular (but still row full rank) and \\(\xv\\) is non-standard normal reduces to \eqref{eq:normal-prob} by a change of variables.
 
 #### **Non-Triangular Square Matrices**
-Suppose \\(\Av\\) is square.
-Let \\(\Av = \Lv \Qv^\top\\) be the LQ decomposition.
+Suppose \\(\Av\\) is square and full rank but not triangular.
+Let \\(\Av = \Lv \Qv^\top\\) be its LQ decomposition.
 Then, a change of variables \\(\xv = \Qv \zv\\) reduces the problem to \\(\Pr(\vv \leq \Lv \zv \leq \uv)\\), where \\(\zv\\) is standard normal and \\(\Lv\\) is lower triangular.
 
 #### **Non-Square Wide Matrices**
-We have \\(\Av \in \Rb^{m \times d}\\) with \\(m < d\\).
+Suppose \\(\Av \in \Rb^{m \times d}\\) with \\(m < d\\).
 Similar to the previous argument, applying a LQ decomposition and a change of variables reduces the problem to
 \\(\Pr(\vv \leq \Lv \zv \leq \uv)\\),
 where \\(\Lv \in \Rb^{m \times d}\\) and \\(\Qv \in \Rb^{d \times d}\\).
@@ -42,7 +41,7 @@ Note that the last \\((d - m)\\) columns of \\(\Lv\\) are zeros, which implies t
 Thus, marginalizing out those coordinates reduces the problem to \eqref{eq:normal-prob}.
 
 #### **Non-Standard Normal**
-Let \\(\xv \sim \Nc(\muv, \Sigmav)\\) be a non-standard normal random variable.
+Suppose \\(\xv \sim \Nc(\muv, \Sigmav)\\) is a non-standard normal random variable.
 Let \\(\Lv \Lv^\top = \Sigmav\\) be the Cholesky decomposition.
 A change of variables \\(\xv = \Lv \zv + \muv\\) yields \\(\Pr(\vv \leq \Av(\Lv \zv + \muv) \leq \uv)\\), where \\(\zv\\) is standard normal.
 Reuse the previous argument completes the reduction.
@@ -86,26 +85,27 @@ where the right hand side is readily estimated by Monte Carlo samples.
 ## Discussion
 This fundamental problem of estimating high dimensional normal probability is still under active research.
 The method of separation of variables was developed in the 1990s (Genz, 1992).
-Recent developments are still based on this idea.
+Recent developments are still based on this idea, which we briefly mention below.
 
-The separation of variables method we presented above is based on univariate conditioning: the conditional distribution \eqref{eq:conditional} predicts one variable at a time.
+The separation of variables method we presented above is based on univariate conditioning: The conditional distribution \eqref{eq:conditional} predicts one variable at a time.
 Bivariate conditioning (Genz and Trinh, 2016) uses conditional distributions that predict two variables at a time: \\(p(x_{2i + 1}, x_{2i + 2} \mid x_{1:2i})\\).
 
 A natural idea is reordering the variables in the conditional distributions \eqref{eq:conditional}.
-For instance, Genz and Bretz (2009) propose a heuristic to find a permutation that reduces the variance of the Monte Carlo estimate.
+For instance, Genz and Bretz (2009) propose a heuristic to find a permutation that reduces the variance of the estimate.
 
 Minimax tilting modifies the conditional distribution \eqref{eq:conditional} by an exponential tilting (Botev, 2017).
-Roughly speaking, they replace the standard normal density \\(\phi(x)\\) in the conditional distribution with a translated normal density \\(\phi(x; \mu, 1)\\), where the tilting parameter \\(\mu\\) is optimized.
+Very roughly speaking, they replace the standard normal density \\(\phi(x)\\) in the conditional distribution \eqref{eq:conditional} with a shifted normal density \\(\phi(x; \mu, 1)\\), where the tilting parameter \\(\mu\\) is chosen carefully.
 
-A careful reader will notice that we have ignored the case when the matrix \\(\Av\\) has more rows than columns, i.e., more constraints than the dimension.
+A careful reader will notice that we have ignored the case when the matrix \\(\Av\\) in \eqref{eq:normal-prob} has more rows than columns, i.e., more constraints than dimensions.
 In fact, this is a hard one, which has to rely on Markov chain Monte Carlo methods combined with sophisticated numerical integration methods.
+We have intentionally skipped this case.
 
 ### **Exercises**
-1. Show that the separation of variables estimator still works when \\(\vv = -\infty\\).
+1. Show that the separation of variables estimator still works when some entries of \\(\vv\\) and \\(\uv\\) are infinite.
 
 1. Show the distribution \eqref{eq:importance-dist} is **not** the truncated normal distribution \\(\phi(\xv \mid \vv \leq \Av \xv \leq \uv)\\).
 
-1. Compared to \eqref{eq:importance-dist}, is it sensible to use instead the uniform distribution over the polytope \\(\\{\xv \in \Rb^d: \vv \leq \Av \xv \leq \uv\\}\\) as the importance distribution? Why or why not?
+1. What are the advantages of the importance distribution \eqref{eq:importance-dist} compared to the uniform distribution over the polytope \\(\\{\xv \in \Rb^d: \vv \leq \Av \xv \leq \uv\\}\\)?
 
 ### **References**
 Botev, Z. I. (2017). The normal law under linear restrictions: simulation and estimation via minimax tilting. Journal of the Royal Statistical Society Series B: Statistical Methodology, 79(1), 125-148.
