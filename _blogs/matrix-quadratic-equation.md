@@ -99,7 +99,8 @@ Now consider the following asymmetric variant
 \end{equation}
 \\]
 where \\( \Xv \\) is hit by \\( \Bv \\) from the left side only.
-Again, we assume all matrices are real, \\( \Av \\) is symmetric positive definite, and \\( \Cv \\) is symmetric.[^is_it_more_general]
+Again, we assume all matrices are real, \\( \Av \\) is symmetric positive definite, and \\( \Cv \\) is symmetric.
+The asymmetric variant is strictly more general than the symmetric equation \eqref{eq:symmetric-equation} (why?).
 
 If \\( \Xv \\) is a root of the asymmetric equation \eqref{eq:asymmetric-equation}, then \\(\Bv^\top \Xv\\) has to be symmetric.
 This is because the right hand side of the identity
@@ -130,6 +131,3 @@ How many roots are there?
 Crone, L. (1981). Second order adjoint matrix equations. Linear Algebra and Its Applications, 39, 61-71.
 
 Yuan, Y., Liu, L., Zhang, H., & Liu, H. (2021). The solutions to the quadratic matrix equation X* AX + B* X + D = 0. Applied Mathematics and Computation, 410, 126463.
-
-### **Notes**
-[^is_it_more_general]: It is not clear to me if the asymmetric equation \eqref{eq:asymmetric-equation} is more general than the symmetric one \eqref{eq:symmetric-equation}.
