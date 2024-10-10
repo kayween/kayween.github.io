@@ -100,7 +100,6 @@ Now consider the following asymmetric variant
 \\]
 where \\( \Xv \\) is hit by \\( \Bv \\) from the left side only.
 Again, we assume all matrices are real, \\( \Av \\) is symmetric positive definite, and \\( \Cv \\) is symmetric.
-The asymmetric variant is strictly more general than the symmetric equation \eqref{eq:symmetric-equation} (why?).
 
 If \\( \Xv \\) is a root of the asymmetric equation \eqref{eq:asymmetric-equation}, then \\(\Bv^\top \Xv\\) has to be symmetric.
 This is because the right hand side of the identity
