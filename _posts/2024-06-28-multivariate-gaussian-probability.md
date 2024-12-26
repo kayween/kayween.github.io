@@ -4,36 +4,41 @@ title: Multivariate Normal Probability
 ---
 # {{ page.title }}
 
-The behavior of a random variable is determined by its cumulative distribution function (CDF).
-The multivariate normal distribution is one of the most widely used distributions in practice.
-Yet, perhaps surprisingly, the CDF of multivariate normal distributions is intractable.
-That is, there is no "easy" way to compute the multivariate normal probability
+Given a Gaussian random variable \\(\xv \sim \Nc(\muv, \Sigmav)\\) and a constant vector \\(\uv \in \Rb^d\\), we are interested in computing the probability
 \\[
-    \Pr(\xv \leq \uv), \; \text{where} \; \xv \sim \Nc(\muv, \Sigmav).
+    \Pr(\xv \leq \uv),
 \\]
-Analytical expressions only exist for special cases, e.g., \\(\xv\\) has independent coordinates.
-However, no analytical expressions exist in general, so one has to resort to Monte Carlo methods to numerically estimate the probability.
+where the inequality is element-wise.
 
-## Problem
-We are going to adopt a formulation slightly more general than the multivariate normal CDF.
+This probability is exactly the CDF of multivariate normal distributions---a fundamental quantity that characterizes the behavior of the distribution.
+Yet, perhaps surprisingly, it is intractable (no analytical expression) to compute except in a few special cases.
+Thus, one has to resort to Monte Carlo methods to numerically estimate the probability.
 
-Given a multivariate standard normal random variable \\(\xv \sim \Nc(\zero, \Iv)\\), we are interested in estimating the multivariate normal probability under a set of linear inequality constraints:
+## A Slightly More General Problem
+
+We introduce a slightly more general formulation with the following two modifications:
+1. We restrict \\(\xv \sim \Nc(\zero, \Iv)\\) to be a standard normal random variable;
+1. But we allow a more general linear inequality \\(\vv \leq \Av \xv \leq \uv\\).
+
+Namely, we arrive at the integral
 \\[
 \begin{equation}
 \label{eq:normal-prob}
-    \Pr(\vv \leq \Av \xv \leq \uv) = \int_{\vv \leq \Lv \xv \leq \uv} \phi(\xv) \diff \xv,
+    \Pr(\vv \leq \Av \xv \leq \uv) = \int_{\vv \leq \Av \xv \leq \uv} \phi(\xv) \diff \xv,
 \end{equation}
 \\]
-where \\(\phi(\xv) \propto \exp(-\frac12 \xv^\top \xv)\\) is the standard normal density and \\(\Av \in \Rb^{d \times d}\\) is a full rank lower triangular matrix.
-The seemingly more general case where \\(\Av \in \Rb^{m \times d}\\) is non-square (but still row full rank) and \\(\xv\\) is non-standard normal reduces to \eqref{eq:normal-prob} by a change of variables.
+where \\(\phi(\xv) \propto \exp(-\frac12 \xv^\top \xv)\\) is the standard normal density.
+
+For the sake of presentation, we assume \\(\Av \in \Rb^{d \times d}\\) is a full rank lower triangular matrix.
+The seemingly more general case where \\(\Av \in \Rb^{m \times d}\\) is non-square (but still row full rank) and \\(\xv\\) is non-standard normal can be reduced to \eqref{eq:normal-prob} by a change of variables.
 
 #### **Non-Triangular Square Matrices**
 Suppose \\(\Av\\) is square and full rank but not triangular.
-Let \\(\Av = \Lv \Qv^\top\\) be its LQ decomposition.
-Then, a change of variables \\(\xv = \Qv \zv\\) reduces the problem to \\(\Pr(\vv \leq \Lv \zv \leq \uv)\\), where \\(\zv\\) is standard normal and \\(\Lv\\) is lower triangular.
+Let \\(\Av = \Lv \Qv\\) be its LQ decomposition.
+Then, a change of variables \\(\zv = \Qv \xv\\) reduces the problem to \\(\Pr(\vv \leq \Lv \zv \leq \uv)\\), where \\(\zv\\) is standard normal and \\(\Lv\\) is lower triangular.
 
 #### **Non-Square Wide Matrices**
-Suppose \\(\Av \in \Rb^{m \times d}\\) with \\(m < d\\).
+Suppose \\(\Av \in \Rb^{m \times d}\\) is rectangle with \\(m < d\\) and row full rank.
 Similar to the previous argument, applying a LQ decomposition and a change of variables reduces the problem to
 \\(\Pr(\vv \leq \Lv \zv \leq \uv)\\),
 where \\(\Lv \in \Rb^{m \times d}\\) and \\(\Qv \in \Rb^{d \times d}\\).
