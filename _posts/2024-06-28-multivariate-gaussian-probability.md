@@ -52,8 +52,10 @@ A change of variables \\(\xv = \Lv \zv + \muv\\) yields \\(\Pr(\vv \leq \Av(\Lv 
 Reuse the previous argument completes the reduction.
 
 ## Monte Carlo Estimate by Separation of Variables
-We are going to use importance sampling to estimate the integral \eqref{eq:normal-prob}.
-Since \\(\Av\\) is lower triangular, the linear inequality constraint \\(\vv \leq \Av \xv \leq \uv\\) can be rewritten as
+We will estimate the integral \eqref{eq:normal-prob} by importance sampling.
+The basic idea is to construct a different distribution that is easy to sample from and whose support is exactly the domain defined by the inequality constraints.
+
+Since \\(\Av\\) is lower triangular, the linear inequality constraints \\(\vv \leq \Av \xv \leq \uv\\) can be rewritten as
 \\[
     \tilde v_i \leq x_i \leq \tilde u_i, \quad i = 1, 2, \cdots, d,
 \\]
@@ -86,6 +88,7 @@ Using \\(p(\xv)\\) as the importance weight to estimate \eqref{eq:normal-prob} y
 \Eb_{\xv \sim p(\xv)}\left[\prod_{i=1}^{d} \Big(\Phi(\tilde u_i) - \Phi(\tilde v_i)\Big) \right],
 \\]
 where the right hand side is readily estimated by Monte Carlo samples.
+We have removed the inequality constraints because samples from \\(p(\xv)\\) automatically satisfy the constraints.
 
 ## Discussion
 Perhaps surprisingly, this fundamental problem of estimating high dimensional normal probability is still under active research.
@@ -99,7 +102,7 @@ A natural idea is tweaking the order of the variables in the conditional distrib
 For instance, Genz and Bretz (2009) propose a heuristic to find a permutation of the coordinates that reduces the Monte Carlo error.
 
 Minimax tilting modifies the conditional distribution \eqref{eq:conditional} by an exponential tilting (Botev, 2017).
-Very roughly speaking, they replace the standard normal density \\(\phi(x)\\) in the conditional distribution \eqref{eq:conditional} with a shifted normal density \\(\phi(x; \mu, 1)\\), where the tilting parameter \\(\mu\\) is chosen carefully.
+Very roughly speaking, they replace the standard normal density \\(\phi(x)\\) in the conditional distribution \eqref{eq:conditional} with a shifted normal density \\(\phi(x; \mu, 1)\\), where the shift parameter \\(\mu\\) is chosen carefully.
 
 A careful reader will notice that we have ignored the case when the matrix \\(\Av\\) in \eqref{eq:normal-prob} has more rows than columns, i.e., more constraints than dimensions.
 In fact, this is a hard one, which has to rely on Markov chain Monte Carlo methods combined with sophisticated numerical integration methods.
@@ -107,7 +110,7 @@ We have intentionally skipped this case.
 
 ### **Exercises**
 1. Show that separation of variables still works when some entries of \\(\vv\\) and \\(\uv\\) in  \eqref{eq:normal-prob} are infinite.
-Hence, the method of separation of variables applies to the normal CDF as well.
+Hence, the method of separation of variables indeed applies to the normal CDF as well.
 
 1. Show the distribution \eqref{eq:importance-dist} is ***not*** the truncated normal distribution \\(\phi(\xv \mid \vv \leq \Av \xv \leq \uv)\\).
 
