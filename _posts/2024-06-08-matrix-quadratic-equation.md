@@ -38,7 +38,7 @@ The roots, if exist, are of the form
 where \\(\Lambdav \in \Rb^{r \times r}\\) and \\(\Uv \in \Rb^{n \times r}\\) are matrices in the (compact) spectral decomposition \\(\Sv = \Uv \Lambdav \Uv^\top\\), and \\(\Vv \in \Rb^{m \times r}\\) is an arbitrary column orthonormal matrix.
 </i>
 
-<i>Proof.</i>
+<!-- <i>Proof.</i>
 If \\(m < r\\), the equation's two sides do not have the same rank, and thus cannot be equal.
 When \\(m > r\\), it is trivial to verify \\(\Vv \Lambdav^{\frac12} \Uv^\top\\) is indeed a root as long as \\(\Vv\\) is column orthonormal.
 It remains to prove all roots can be written in this form.
@@ -65,7 +65,7 @@ since
 \big(\Xv \Uv_{\perp}\big)
 = 0
 \\).
-**Q.E.D.**
+**Q.E.D.** -->
 
 ## The General Case
 
