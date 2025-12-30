@@ -103,14 +103,14 @@ Differentiating both sides of the equation \\(\Sigma = L L^\top\\) gives
 \\]
 where we emphasize that \\(\diff \Sigma\\) is symmetric and \\(\diff L\\) is lower triangular.
 To get the derivative, we need to express \\(\diff L\\) in terms of \\(\diff \Sigma\\), which requires some algebra.
-We skip the step-by-step derivation here and directly give the final identity by Murray (2008, Section 3):
+We skip the step-by-step derivation here and directly give the final identity by Murray (2016, Section 3):
 \\[
 \begin{equation}
 \label{eq:cholesky_derivative}
     \diff L = L \Phi\big(L\inv \diff \Sigma L^{-\top}\big),
 \end{equation}
 \\]
-where \\(\Phi\\) is an element-wise function that zeros out the upper triangular part and halves the diagonal entries, i.e., \\(\Phi(X) = \operatorname{tril}(Z) - \frac12 \operatorname{Z}\\) for any symmetric \\(Z\\).
+where \\(\Phi\\) is an element-wise function that zeros out the upper triangular part and halves the diagonal entries, i.e., \\(\Phi(Z) = \operatorname{tril}(Z) - \frac12 \operatorname{Z}\\) for any symmetric \\(Z\\).
 
 Next, we need to take the adjoint (i.e., transpose) of the derivative in \eqref{eq:cholesky_derivative}.
 Recall that the derivative \eqref{eq:cholesky_derivative} is a linear operator that maps from the space of symmetric matrices to the space of lower triangular matrices.
@@ -144,7 +144,7 @@ The remaining is straightforward calculation:
 \\]
 where we emphasize that both inner products are defined in the space of symmetric matrices.
 From the last expression, we obtain \\(\bar\Sigma = L^{-\top} \Phi^ *\big(\operatorname{tril}\big(L^\top \bar{L}\big)\big) L\inv\\).
-This expression is [what's implemented in PyTorch](https://github.com/pytorch/pytorch/blob/4a0693682a8574bdc36e1ca2ea7bd2ddf5c19340/torch/csrc/autograd/FunctionsManual.cpp#L1984-L2010), different from the one in Murray (2008, Section 3).
+This expression is [what's implemented in PyTorch](https://github.com/pytorch/pytorch/blob/4a0693682a8574bdc36e1ca2ea7bd2ddf5c19340/torch/csrc/autograd/FunctionsManual.cpp#L1984-L2010), different from the one in Murray (2016, Section 3).
 
 ## Final Remarks
 
