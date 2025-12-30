@@ -110,7 +110,7 @@ We skip the step-by-step derivation here and directly give the final identity by
     \diff L = L \Phi\big(L\inv \diff \Sigma L^{-\top}\big),
 \end{equation}
 \\]
-where \\(\Phi\\) is an element-wise function that zeros out the upper triangular part and halves the diagonal entries, i.e., \\(\Phi(Z) = \operatorname{tril}(Z) - \frac12 \operatorname{Z}\\) for any symmetric \\(Z\\).
+where \\(\Phi\\) is an element-wise function that zeros out the upper triangular part and halves the diagonal entries, i.e., \\(\Phi(Z) = \operatorname{tril}(Z) - \frac12 \operatorname{diag}(Z)\\) for any symmetric \\(Z\\).
 
 Next, we need to take the adjoint (i.e., transpose) of the derivative in \eqref{eq:cholesky_derivative}.
 Recall that the derivative \eqref{eq:cholesky_derivative} is a linear operator that maps from the space of symmetric matrices to the space of lower triangular matrices.
