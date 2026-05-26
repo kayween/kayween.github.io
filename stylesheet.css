@@ -1,5 +1,98 @@
+:root {
+    --bg: #ffffff;
+    --text: #000000;
+    --muted: #555555;
+    --rule: #e1e1e1;
+    --link: #0000ee;
+    --accent: #b04a3a;
+    --max-width: 880px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+}
+
 h2 {
     padding-bottom: 4px;
     margin-bottom: 8px;
-    border-bottom: solid 2px #e1e1e1;
+    border-bottom: solid 2px var(--rule);
+}
+
+/* Header */
+.header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.header img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+}
+
+.links .sep {
+    margin: 0 0.5em;
+    color: var(--muted);
+}
+
+/* Publications */
+ul.pubs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pubs li {
+    margin-bottom: 1rem;
+}
+
+ul.pubs .venue {
+    font-style: italic;
+}
+
+ul.pubs .award {
+    color: var(--accent);
+    font-style: normal;
+    margin-left: 0.5rem;
+}
+
+/* Misc list */
+ul.notes {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+}
+
+/* Footer */
+footer {
+    margin-top: 3rem;
+    font-size: small;
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 2rem 1.25rem 3rem;
+    }
+    .header {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .header img {
+        width: 120px;
+        height: 120px;
+    }
 }
